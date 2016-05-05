@@ -579,6 +579,7 @@
 	(setf column (funcall function_ set_of_subsets))
 
 	(setf code_set (flatten (collectCode column)))
+	(format t "~%python code: ~%")
 	(format t (listOfStringsToString code_set))
 
 	(push column (getf local_pointer :children)))
