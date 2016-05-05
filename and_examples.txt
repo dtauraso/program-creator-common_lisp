@@ -1,0 +1,9 @@
+5 and 6
+7 and five
+seven and five
+five and six
+one or two
+seven or nine
+if zero and 7 then six and seven  else one and two
+if 7 and 6 then 2 and 4 else 3 and five
+if 2 and 4
