@@ -11,3 +11,5 @@ To make the abstract group names none of the elements in the specs are supposed 
 When it knows what the funciton names are, it is supposed to group the input according to the position of the funciton names and parameters relative to their positions in the specs.
 
 The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code for what the design could be.  It is attempting to decipher vaugue input.
+
+I made this program because I want the computer to understand me.
