@@ -11,4 +11,4 @@ special.  The function_names.lisp is a filter for remaining possible function na
 
 When it knows what the funciton names are, it is supposed to group the input according to the position of the funciton names and parameters relative to their positions in the specs.
 
-The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code for what the design could be.  It is attempting to decifer vaugue input.
+The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code for what the design could be.  It is attempting to decipher vaugue input.
