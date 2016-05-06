@@ -15,3 +15,5 @@ The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code fo
 I made this program because I want the computer to understand me.
 
 The code works for python 3.
+
+Each of the specs lines represents 1 program
