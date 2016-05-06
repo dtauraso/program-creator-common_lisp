@@ -16,4 +16,7 @@ I made this program because I want the computer to understand me.
 
 The code works for python 3.
 
-Each of the specs lines represents 1 program
+Each line in and_examples.txt represents specs.
+
+Each of the specs represents 1 program.
+
