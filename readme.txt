@@ -13,3 +13,5 @@ When it knows what the funciton names are, it is supposed to group the input acc
 The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code for what the design could be.  It is attempting to decipher vaugue input.
 
 I made this program because I want the computer to understand me.
+
+The code works for python 3.
