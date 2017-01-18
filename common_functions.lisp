@@ -12,7 +12,7 @@
 (defun readLines(var)
 
 	; not sure why the references to line on multiple calls of g did not change the value of line
-	; setting line as an item in cons is different from the set and not store in addElementAVL
+	; setting line as an item in cons is different from the set and not store in addElementAVL in avl_tree.lisp
 	(setf line (read-line var nil))
 	(if 	line
 		(cons line (readLines var))
@@ -115,14 +115,14 @@
 	; children = [e_1, e_2, e_3]
 	; e_i = [n_1, n_2, n_3]
 	; e_i = concrete column = collection of property lists
-	; e_i = column of abstract nodes = collection of peroperty lists
+	; e_i = column of abstract nodes = collection of property lists
 	; n_j = property list
 	; children = [[n_1, n_2, n_3][n_1, n_2, n_3]]
 
 	; abstract's children
 	; children = [e_1, e_2, e_3]
 	; e_i = concrete column = collection of property lists
-	; e_i = column of abstract nodes = collection of peroperty lists
+	; e_i = column of abstract nodes = collection of property lists
 	(cond 	((eql (first list_of_children) :label)
 			(cons
 				list_of_children

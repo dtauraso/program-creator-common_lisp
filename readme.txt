@@ -20,3 +20,5 @@ Each line in and_examples.txt represents specs.
 
 Each of the specs represents 1 program.
 
+What I learned while doing this project:
+recursion, Common Lisp, tree data structure, Common Lisp plist data structure
