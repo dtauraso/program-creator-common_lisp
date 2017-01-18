@@ -1,3 +1,6 @@
+What I learned while doing this project:
+recursion, Common Lisp, tree data structure, Common Lisp plist data structure
+
 Adding any extra spec lines is dangerous and may result in a crash
 changing the names of the funcitons is ok as long as you change the names of the function_name.lisp files
 
@@ -20,5 +23,3 @@ Each line in and_examples.txt represents specs.
 
 Each of the specs represents 1 program.
 
-What I learned while doing this project:
-recursion, Common Lisp, tree data structure, Common Lisp plist data structure
