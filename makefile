@@ -1,0 +1,3 @@
+
+run:
+	clisp start.lisp

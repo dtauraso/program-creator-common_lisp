@@ -1,27 +1,10 @@
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; not restricted to any of the 5 cases
-(defun openFile(file_name)
-
-	(with-open-file (var file_name)		
-			(readLines var)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun readLines(var)
-
-	; not sure why the references to line on multiple calls of g did not change the value of line
-	; setting line as an item in cons is different from the set and not store in addElementAVL in avl_tree.lisp
-	(setf line (read-line var nil))
-	(if 	line
-		(cons line (readLines var))
-		nil))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+#|
 (defun split (string_ delimiter)
-
+	; use loop
+	; collect untill hit delimiter
+	; add current to collection
+	; move 1 past whitespace(in recursive call)
+	; repeat unill end of string (use dfa)
 	; original design from http://www.lee-mac.com/stringtolist.html
 
 		; find position of delimiter = pos
@@ -48,8 +31,87 @@
 
 				nil))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun printSplit2State (state)
 
+	(cond
+				((= state 0)
+					(print "collect"))
+				
+				((= state 1)
+					(print "add_collection"))
+				
+				((= state 2)
+					(print "collect_nothing"))
+				
+				((= state 3)
+					(print "return_"))
+				((= state -1)
+					(print "error")
+					)))
+
+|#
+(defmacro stackIsEmpty (stack)
+
+	; the first paramter is evaluated before string= (caller of stackIsEmpty) is applied to it
+	`(= (eval `(length ,stack)) 0))
+(defun printState (state function_name)
+
+	(cond ((string= function_name "makeIfElseStatement")
+			(cond
+				((= state 0)
+					(print "start"))
+				
+				((= state 1)
+					(print "if_else_append"))
+				
+				((= state 2)
+					(print "if_else_subgroup"))
+				
+				((= state 3)
+					(print "then_append"))
+				
+				((= state 4)
+					(print "then_subgroup"))
+
+				((= state 5)
+					(print "return_"))))
+
+			((string= function_name "makeSubGroup")
+				(cond
+				((= state 0)
+					(print "start"))
+
+				((= state 1)
+					(print "get_parameter_1"))
+				
+				((= state 2)
+					(print "get_operator"))
+				
+				((= state 3)
+					(print "get_parameter_2"))
+				
+				((= state 4)
+					(print "return_"))
+				
+				(t
+					(print "error"))))
+				
+				; makeSubGroup states
+
+				;
+				(t
+					(print "error"))))
+#|
+(defun toStrings (vector_of_strings i)
+
+	; i starts as 0
+	(cond ((= (length vector_of_strings) i)
+			(aref vector_of_strings 0)
+		)
+		(t
+			(concatenate 'string (aref vector_of_strings i) (toStrings vector_of_strings (+ i 1))))))
+|#
+#|
 (defun transform_1 (parameters)
 
 	; only used with the split function
@@ -439,9 +501,35 @@
 
 	; make sure only the concrete columns have same sength as the specs are considered
 
+; design with dfa and recursion(except for main dfa loop);
+; meant to be oversimplified version of the hierarchial temporal memory algorithm
+; because at the time I had no idea of how to make a small working version of the htm algorithm
+; ended up as a playground for me to practice aranging data in a hierarchy and recursion before I took the data structures class at SSU
+; it was a very valuable tool that showed me how to think recursively
 
+; hierarchy of frequencies where the abstracts have freq > 1
+;case 1 if there are no abstracts in list
+	; collect list
+	; collect position of items and what they are for case 3
+	; count number of lists
+;case 2 if item is an abstract in list
+	; if it comes before another abstract it is the outer abstract
+	; make a tree holding the larger abstract along with the rest of the list
+	; have the tree's (secondary child) hold the lower abstract subtrees
+	; then add the rest of the items for the sublist(grouping them as abstracts are found) in the root 
+	; return to top of loop
 
+;case 3 if see same item in same position in >= 2 lists
+	; said item is an abstract
+	; save as list
+	; make tree with abstract as root and a list of the lists where the abstract appears in collection of lists from case 1
+	; save the tree in a list of abstract trees(forest)
 	; this will be nil if specs is the first instance of abstract group (that hasn't been made yet)
+; globals
+; log of lists read in
+; positions of iteams and what they are (for each list?)
+; 1 big tree
+; list of abstract trees(abstract item is root and its children are the lists containign the abstracts)
 	; list of conrete column having length equal to specs length
 	(setf
 		specs_length_sized_concrete_columns
@@ -880,3 +968,123 @@
 
 				(processEachSpecs (rest specs)))
 		(t nil)))
+|#
+#|
+			 ;(print (makeSubgroup))
+			 ; can either use makeSubgroup for the program or for debugging
+			 ; but not both
+			 (setf different_structures
+			 	(list
+			 		:and_  (getf different_structures :and_)
+			 		:or_ (append (getf different_structures :or_) (list (makeSubgroup)) )
+			 		:if_then_else (getf different_structures :if_then_else)
+			 		:if_ (getf different_structures :if_))))
+				;(print "stack")
+				;(print stack)
+				;(print "state")
+				;(printSplit2State state)
+				;(print "->")
+
+
+
+				;(printSplit2State state)
+				;(terpri)
+
+|#
+
+; make input
+; make algorithm around input
+; test bool
+#|
+(print "test if")
+; original test cases
+; accepts
+
+(setf line (list "5" "and" "6") )
+(makeSubGroup)
+
+(setf line (list "7" "and" "five") )
+(makeSubGroup)
+
+(setf line (list "seven" "and" "five") )
+(makeSubGroup)
+
+(setf line (list "five" "and" "six") )
+(makeSubGroup)
+
+(setf line (list "one" "or" "two") )
+(makeSubGroup)
+
+(setf line (list "seven" "or" "nine") )
+(makeSubGroup)
+
+(setf line (list "if" "zero" "and" "7" "then" "six" "or" "seven"  "else" "one" "and" "two") )
+(makeIfElseStatement)
+
+
+(setf line (list "if" "7" "and" "6" "then" "2" "and" "4" "else" "3" "and" "five") )
+
+(setf line (list "if" "2" "and" "4") )
+(makeIfElseStatement)
+
+; aditional test cases
+(setf line (list "if" "6" "or" "five"))
+(makeIfElseStatement )
+
+; rejects
+
+(setf line (list "if"))
+(makeIfElseStatement )
+
+(setf line (list "five"))
+(makeSubGroup )
+
+(setf line (list "five" "and"))
+(makeSubGroup )
+
+(setf line (list "and" "seven"))
+(makeSubGroup )
+
+(setf line (list ))
+(makeSubGroup )
+
+(setf line (list "if" "a" "and" "seven" "then" "five" "or" "b" ))
+(makeIfElseStatement )
+
+
+(setf line (list "if" "a" "and" "seven" "then"  ))
+(makeIfElseStatement )
+
+
+(setf line (list "if" "then"  ))
+(makeIfElseStatement )
+
+(setf line (list "one" "five" "six"))
+(makeSubGroup )
+
+(setf line (list "if" "then" "else" ))
+(makeIfElseStatement )
+
+
+(setf line (list "else" "if" "then"  ))
+(makeIfElseStatement )
+
+(setf line (list "if" "a" "or" "five"))
+(makeIfElseStatement )
+; rejects
+
+
+(setf line (list "if" "a" "and" "seven" "then" "five" "or" "b" "else" "6" "and" "8" ))
+(makeIfElseStatement )
+
+(setf line (list "if"))
+(makeIfElseStatement )
+
+; test on bad input
+; put error catches in
+(setf line (list "if" "a" "and" "seven" "then" "five" "or" "b"))
+(makeIfElseStatement)
+|#
+
+
+

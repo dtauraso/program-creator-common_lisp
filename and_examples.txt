@@ -1,9 +1,10 @@
 5 and 6
+if zero and 7 then six and seven  else one and two
 7 and five
 seven and five
 five and six
+if 7 and 6 then 2 and 4 else 3 and five
+if 3 and five then 7 and 6 else 2 and 4
 one or two
 seven or nine
-if zero and 7 then six and seven  else one and two
-if 7 and 6 then 2 and 4 else 3 and five
-if 2 and 4
+if 2 and 6
