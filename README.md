@@ -12,9 +12,7 @@ It translates some english to python and then runs the python code.  It also pri
 
 The purpose of "if 2 and 4" in and_examples.txt is to calculate possible code for what the design could be.  It is attempting to decipher vaugue input.
 
-I took out the part where it looks in its own data to find out if it has a python translation for the english specs before it looks for a file that has the correct python code.  The program is simpler now.
-
-I made this program because I want the computer to understand me.
+I made this program because I want the computer to translate parts of english phrases.
 
 The code works for python 3.
 
